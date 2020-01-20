@@ -2,7 +2,6 @@
 
 Simplest script for calulating radius of gyration of an object using structured vtk file. 
 
-I am using it for tests.
 
 ## Usage
 
