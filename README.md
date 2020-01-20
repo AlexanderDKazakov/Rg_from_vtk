@@ -1,2 +1,17 @@
-# Rg_from_vtk
-Calculate radius of gyration from vtk file 
+## Radius of gyration from vtk
+
+Simplest script for calulating radius of gyration of an object using structured vtk file. 
+
+I am using it for tests.
+
+## Usage
+
+`./rg_calc <path/to/structured/vtk/file>`
+
+![Output](./fig/output.png)
+
+![Anobject](./fig/anobject.png)
+
+
+
+
