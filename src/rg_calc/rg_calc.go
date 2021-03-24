@@ -50,11 +50,13 @@ func NewPoint(x, y, z int, v float64) *Point {
 }
 
 func main() {
-	fmt.Println("==== vtk =====")
+	fmt.Println("==== GO [VTK->Rg^2] =====")
 	if len(os.Args) == 1 {
 		fmt.Println("Please specify path to vtk file!")
 		return
 	}
+    fmt.Println("v. 0.0.1")
+    fmt.Println("You provided next path: ", os.Args[1])
 	inputPathFilename := os.Args[1]
 
 	var (
@@ -81,9 +83,9 @@ func main() {
 			_boxSize = reInt.FindAllString(cs, -1)
 			boxSize, err = strconv.Atoi(_boxSize[0])
 			check(err)
-			fmt.Printf("Box size %d %d %d\n", boxSize, boxSize, boxSize)
+            fmt.Printf("Box size: [%d, %d, %d]\n", boxSize, boxSize, boxSize)
 		}
-		
+
 		// Skip header
 		if lineNum > 9 {
 			f, err := strconv.ParseFloat(cs, 32)
@@ -104,14 +106,14 @@ func main() {
 		}
 		lineNum++
 	}
-	
+
 	err = scanner.Err()
 	check(err)
 
 	rg2 := 0.0
 	mass := 0.0
 	for _, v := range points { mass += v.v }
-	fmt.Println("mass:", mass)
+    fmt.Printf("Object mass: %.2f\n", mass)
 
 	// cm
 	var xtemp, ytemp, ztemp float64 = 0.0, 0.0, 0.0
@@ -121,7 +123,7 @@ func main() {
 		ztemp += (float64(point.z) * point.v)
 	}
 	cm := Point{int(xtemp / mass), int(ytemp / mass), int(ztemp / mass), 0.0}
-	fmt.Println("Center of mass: ", cm)
+	fmt.Printf("Center of mass: [%d, %d, %d]\n", cm.x, cm.y, cm.z)
 
 	var cdist Point
 	for _, point := range points {
@@ -129,5 +131,5 @@ func main() {
 		rg2 += point.v * (math.Pow(float64(cdist.x), 2) + math.Pow(float64(cdist.y), 2) + math.Pow(float64(cdist.z), 2))
 	}
 	rg2 /= mass
-	fmt.Println("Rg2:", rg2)
+	fmt.Printf("Rg2: %.5f\n", rg2)
 }
